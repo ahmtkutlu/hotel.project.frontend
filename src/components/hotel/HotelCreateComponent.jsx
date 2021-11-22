@@ -1,73 +1,63 @@
 import React, { Component } from 'react'
-import EmployeeService from '../services/EmployeeService';
+import HotelService from '../../services/HotelService';
 
-export default class CreateEmployeeComponent extends Component {
+export default class HotelCreateComponent extends Component {
 
     constructor(props) {
 
         super(props);
        
         this.state = {
-             //step 2
             id: this.props.match.params.id,
             name: '',
-            mail: ''
+            status: false
         }
         this.changeNameHandler = this.changeNameHandler.bind(this);
-        this.changeMailHandler = this.changeMailHandler.bind(this);
-        this.saveEmployee = this.saveEmployee.bind(this);
+        this.changeStatusHandler = this.changeStatusHandler.bind(this);
+        this.saveHotel = this.saveHotel.bind(this);
     }
-    //step 3
     componentDidMount() {
-            //step4 
-        if(this.state.id == 0){
+        if(this.state.id === 'add'){
             return;
         } else {
-            EmployeeService.getEmployeeById(this.state.id).then((res) => {
-                let employee = res.data;
-                this.setState({ name: employee.name, mail: employee.mail });
+            HotelService.getHotelById(this.state.id).then((res) => {
+                let hotel = res.data;
+                this.setState({ name: hotel.name, status: hotel.status });
             });
         }
     }
 
-    saveEmployee = (e) => {
+    saveHotel = (e) => {
         e.preventDefault();
-        let employee = { name: this.state.name, mail: this.state.mail };
-        console.log(JSON.stringify(employee));
-
-
-             //step5 
-             if(this.state.id == 0){
-                EmployeeService.createEmployee(employee).then(res => {
-                    this.props.history.push('/employees');
+        let hotel = { name: this.state.name, status: this.state.status };
+             if(this.state.id === 'add'){
+                HotelService.createHotel(hotel).then(res => {
+                    this.props.history.push('/hotel');
                 });
             } else {
-                EmployeeService.updateEmployee(employee, this.state.id).then((res) => {
-                    this.props.history.push('/employees');
+                HotelService.updateHotel(hotel, this.state.id).then((res) => {
+                    this.props.history.push('/hotel');
                 })
             }
-
-       
     }
 
     changeNameHandler = (event) => {
         this.setState({ name: event.target.value });
     }
 
-    changeMailHandler = (event) => {
-        this.setState({ mail: event.target.value });
+    changeStatusHandler = (event) => {
+        this.setState({ status: event.target.value });
     }
 
     cancel(){
-        this.props.history.push('/employees');
+        this.props.history.push('/hotel');
     }
 
-    //step 8
     getTitle(){
-        if(this.state.id == 0){
-           return "Add Employee"
+        if(this.state.id === 'add'){
+           return "Add Hotel"
         } else{
-           return "Update Employee"
+           return "Update Hotel"
         }
        }
 
@@ -87,10 +77,10 @@ export default class CreateEmployeeComponent extends Component {
 
 
                                     <div className="form-group">
-                                        <label>Mail</label>
-                                        <input type="text" placeholder="Mail" name="mail" className="form-control" value={this.state.mail} onChange={this.changeMailHandler} />
+                                        <label>Status</label>
+                                        <input type="checkbox" name="mail" value={this.state.status} onChange={this.changeStatusHandler} />
                                     </div>
-                                    <button className="btn btn-success mt-2" onClick={this.saveEmployee}>Save</button>
+                                    <button className="btn btn-success mt-2" onClick={this.saveHotel}>Save</button>
                                     <button className="btn btn-danger mt-2" onClick={this.cancel.bind(this)} style={{ marginLeft: "10px" }}>Cancel</button>
                                 </form>
                             </div>

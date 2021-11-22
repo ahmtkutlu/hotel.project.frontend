@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import EmployeeService from '../services/EmployeeService';
+import UserService from '../../services/UserService';
 
-export default class EmployeeDetailComponent extends Component {
+export default class UserDetailComponent extends Component {
 
     constructor(props) {
 
@@ -9,7 +9,7 @@ export default class EmployeeDetailComponent extends Component {
 
         this.state = {
             id: this.props.match.params.id,
-            employee: {
+            user: {
 
             }
         }
@@ -17,34 +17,33 @@ export default class EmployeeDetailComponent extends Component {
     }
 
     componentDidMount() {
-        EmployeeService.getEmployeeById(this.state.id).then((res) => {
-            this.setState({ employee: res.data });
+        UserService.getUserById(this.state.id).then((res) => {
+            this.setState({ user: res.data });
         });;
     }
-
 
     render() {
         return (
             <div className="card">
                 <div className="card-header">
-                    <h4>Employee Detail</h4>
+                    <h4>User Detail</h4>
                 </div>
                 <div className="card-body">
                     <div className="row">
                         <div className="col-md-2">
-                            Employee Name :
+                            Name :
                         </div>
                         <div className="col-md-2">
-                            {this.state.id} - {this.state.employee.name}
+                            {this.state.id} - {this.state.user.name}
                         </div>
                         
                     </div>
                     <div className="row">
                         <div className="col-md-2">
-                        Employee Mail:
+                        Mail:
                         </div>
                         <div className="col-md-2">
-                            {this.state.employee.mail}
+                            {this.state.user.mail}
                         </div>
                     </div>
                 </div>

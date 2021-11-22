@@ -16,7 +16,7 @@ export default class HeaderComponent extends Component {
                 <header>
                     <nav className="navbar navbar-expand-md navbar-dark bg-dark">
                         <div>
-                            <a href="https://ahmetkutlu.org">Employee Management App</a>
+                            <a href="http://localhost:3000">Hotel Management App</a>
                         </div>
                     </nav>
                 </header>

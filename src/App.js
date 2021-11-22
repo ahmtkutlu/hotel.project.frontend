@@ -1,32 +1,43 @@
 import './App.css';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-import ListEmployeeComponent from './components/ListEmployeeComponent';
-import HeaderComponent from './components/HeaderComponent';
-import FooterComponent from './components/FooterComponent';
-import CreateEmployeeComponent from './components/CreateEmployeeComponent';
-import UpdateEmployeeComponent from './components/UpdateEmployeeComponent';
-import EmployeeDetailComponent from './components/EmployeeDetailComponent';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+
+import HeaderComponent from './components/common/HeaderComponent';
+import FooterComponent from './components/common/FooterComponent';
+import LeftMenu from './components/common/LeftMenu';
+import Dashboard from './components/common/Dashboard';
+
+import UserList from './components/user/UserListComponent';
+import UserCreate from './components/user/UserCreateComponent';
+import UserDetail from './components/user/UserDetailComponent';
+
+import HotelList from './components/hotel/HotelListComponent';
+import HotelCreate from './components/hotel/HotelCreateComponent';
+import HotelDetail from './components/hotel/HotelDetailComponent';
 
 function App() {
   return (
-   <div>
-     <Router>
-        <HeaderComponent />
-        <div className="container">
-          <Switch>
-            <Route path="/" exact component={ListEmployeeComponent}></Route>
-            <Route path="/employees" component={ListEmployeeComponent}></Route>
-            //step1
-            <Route path="/add-employee/:id" component={CreateEmployeeComponent}></Route>
-            <Route path="/employee-detail/:id" component={EmployeeDetailComponent}></Route>
-            {/* <Route path="/update-employee/:id" component={UpdateEmployeeComponent}></Route> */}
-          </Switch>
-        </div>
-        <FooterComponent/>
-    </Router>
-   </div>
-
-   
+      <Router>
+          <HeaderComponent />
+          <div className="row">
+            <div className="col-md-2">
+              <LeftMenu />
+            </div>
+            <div className="col-md-10">
+              <div className="container">
+                <Switch>
+                  <Route path="/" exact component={Dashboard}></Route>
+                  <Route path="/users" component={UserList}></Route>
+                  <Route path="/add-user/:id" component={UserCreate}></Route>
+                  <Route path="/user-detail/:id" component={UserDetail}></Route>
+                  <Route path="/hotel" component={HotelList}></Route>
+                  <Route path="/add-hotel/:id" component={HotelCreate}></Route>
+                  <Route path="/hotel-detail/:id" component={HotelDetail}></Route>
+                </Switch>
+            </div>
+            </div>
+          </div>
+          <FooterComponent/>
+      </Router>
   );
 }
 
