@@ -14,9 +14,13 @@ import HotelList from './components/hotel/HotelListComponent';
 import HotelCreate from './components/hotel/HotelCreateComponent';
 import HotelDetail from './components/hotel/HotelDetailComponent';
 
+import LoginComponent from './components/LoginComponent';
+
 function App() {
   return (
-      <Router>
+
+    <LoginComponent/>
+     /* <Router>
           <HeaderComponent />
           <div className="row">
             <div className="col-md-2">
@@ -37,7 +41,7 @@ function App() {
             </div>
           </div>
           <FooterComponent/>
-      </Router>
+      </Router>*/
   );
 }
 

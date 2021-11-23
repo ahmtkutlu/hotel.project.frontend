@@ -8,20 +8,24 @@ class UserService {
         return axios.get(USER_API_BASE_URL);
     }
 
-    createUser(hotel) {
-        return axios.post(USER_API_BASE_URL, hotel);
+    createUser(user) {
+        return axios.post(USER_API_BASE_URL, user);
     }
 
-    getUserById(hotelId) {
-        return axios.get(USER_API_BASE_URL + '/' + hotelId);
+    getUserById(userId) {
+        return axios.get(USER_API_BASE_URL + '/' + userId);
     }
 
-    updateUser(hotel, hotelId) {
-        return axios.put(USER_API_BASE_URL + '/' + hotelId, hotel);
+    updateUser(user, userId) {
+        return axios.put(USER_API_BASE_URL + '/' + userId, user);
     }
 
-    deleteUser(hotelId) {
-        return axios.delete(USER_API_BASE_URL + '/' + hotelId);
+    deleteUser(userId) {
+        return axios.delete(USER_API_BASE_URL + '/' + userId);
+    }
+
+    login(user){
+        return axios.get(USER_API_BASE_URL+'/login', user);
     }
 
 }
